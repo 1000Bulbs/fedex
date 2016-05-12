@@ -1,14 +1,14 @@
 def fedex_credentials
-  @fedex_credentials ||= credentials["development"]
+  @fedex_credentials ||= test_credentials["development"]
 end
 
 def fedex_production_credentials
-  @fedex_production_credentials ||= credentials["production"]
+  @fedex_production_credentials ||= test_credentials["production"]
 end
 
 private
 
-def credentials
+def test_credentials
   @credentials ||= begin
     YAML.load_file("#{File.dirname(__FILE__)}/../config/fedex_credentials.yml")
   end
