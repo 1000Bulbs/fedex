@@ -6,7 +6,7 @@ module Fedex
 
     context "shipments with tracking number", :vcr, :focus do
       let(:options) do
-        { :package_id             => "771513950417",
+        { :package_id             => "123456789012",
           :package_type           => "TRACKING_NUMBER_OR_DOORTAG",
           :include_detailed_scans => true
         }

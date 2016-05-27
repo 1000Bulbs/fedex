@@ -75,6 +75,9 @@ module Fedex
         raise NotImplementedError, "Override process_request in subclass"
       end
 
+      def api_request
+        Request::Base.post(api_url, :body => build_xml)
+      end
       private
       # Add web authentication detail information(key and password) to xml request
       def add_web_authentication_detail(xml)

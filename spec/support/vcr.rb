@@ -9,6 +9,6 @@ RSpec.configure do |c|
   c.include Fedex::Helpers
   c.around(:each, :vcr) do |example|
     name = underscorize(example.metadata[:full_description].split(/\s+/, 2).join("/")).gsub(/[^\w\/]+/, "_")
-    VCR.use_cassette(name) { example.call }
+    VCR.use_cassette(name, record: :new_episodes) { example.call }
   end
 end
