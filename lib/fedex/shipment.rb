@@ -10,6 +10,7 @@ require 'fedex/request/pickup'
 require 'fedex/request/pickup_availability'
 require 'fedex/request/service_availability'
 require 'fedex/request/tracking_response'
+require 'fedex/request/signature_proof_of_delivery'
 require 'fedex/request/signature_proof_of_delivery_response'
 require 'fedex/request/xml/base'
 

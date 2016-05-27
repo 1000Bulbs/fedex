@@ -1,5 +1,6 @@
 require 'fedex/request/base'
 require 'fedex/request/xml/signature_proof_of_delivery'
+require 'fedex/request/signature_proof_of_delivery_response'
 
 module Fedex
   module Request
