@@ -76,6 +76,11 @@ module Fedex
       Request::TrackingInformation.new(@credentials, options).process_request
     end
 
+    # @param [Hash] tracking_number, A string with the requested tracking number
+    def signature(options = {})
+      Request::SignatureProofOfDelivery.new(@credentials, options).process_request
+    end
+
     # @param [Hash] shipper, A hash containing the shipper information
     # @param [Hash] recipient, A hash containing the recipient information
     # @param [Array] packages, An array including a hash for each package being shipped
