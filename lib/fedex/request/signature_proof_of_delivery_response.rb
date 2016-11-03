@@ -7,7 +7,7 @@ module Fedex
       attr_accessor :package_id, :credentials
 
       def initialize(response, credentials, package_id)
-        @raw_response =response
+        @raw_response =response.to_h
         @credentials = credentials
         @package_id = package_id
         @response = parse_response
