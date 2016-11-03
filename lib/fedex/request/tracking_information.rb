@@ -25,7 +25,7 @@ module Fedex
       end
 
       def process_request
-        api_response = self.class.post(api_url, :body => build_xml)
+        api_response = self.class.post(api_url, :body => build_xml).to_h
         puts api_response if @debug == true
         response = parse_response(api_response)
 
