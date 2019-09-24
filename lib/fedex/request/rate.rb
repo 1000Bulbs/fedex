@@ -8,6 +8,7 @@ module Fedex
         api_response = self.class.post(api_url, :body => build_xml)
         puts api_response if @debug
         response = parse_response(api_response)
+
         if success?(response)
           rate_reply_details = response[:rate_reply][:rate_reply_details] || []
           rate_reply_details = [rate_reply_details] if rate_reply_details.is_a?(Hash)
@@ -19,13 +20,18 @@ module Fedex
             Fedex::Rate.new(rate_details)
           end
         else
-          error_message = if response[:rate_reply]
-            [response[:rate_reply][:notifications]].flatten.first[:message]
-          else
-            "#{api_response["Fault"]["detail"]["fault"]["reason"]}\n--#{api_response["Fault"]["detail"]["fault"]["details"]["ValidationFailureDetail"]["message"].join("\n--")}"
-          end rescue $1
-          raise RateError, error_message
+          raise RateError, error_message(api_response)
         end
+      end
+
+      def error_message(response)
+        if response["rate_reply"]
+          [response["rate_reply"]["notifications"]].flatten.first["message"]
+        elsif response['CSRError']
+          response['CSRError']['message']
+        else
+          "#{api_response["Fault"]["detail"]["fault"]["reason"]}\n--#{api_response["Fault"]["detail"]["fault"]["details"]["ValidationFailureDetail"]["message"].join("\n--")}"
+        end rescue $1
       end
 
       private
