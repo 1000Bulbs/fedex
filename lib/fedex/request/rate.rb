@@ -20,7 +20,7 @@ module Fedex
             Fedex::Rate.new(rate_details)
           end
         else
-          raise RateError, error_message(api_response)
+          raise RateError, api_response.to_json
         end
       end
 
